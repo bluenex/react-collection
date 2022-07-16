@@ -5,7 +5,7 @@ import ExampleWithTitle from '../components/ExampleWithTitle';
 
 const ButtonExample = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       <ExampleWithTitle title="Plain">
         <Button>Click me!</Button>
       </ExampleWithTitle>
