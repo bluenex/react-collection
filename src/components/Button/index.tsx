@@ -1,8 +1,8 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import { BiLoaderAlt } from "react-icons/bi";
-import { twMerge } from "tailwind-merge";
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import { BiLoaderAlt } from 'react-icons/bi';
+import { twMerge } from 'tailwind-merge';
 
-interface ButtonProps
+export interface ButtonProps
   extends DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
@@ -12,8 +12,8 @@ interface ButtonProps
 
 const Button = ({ isLoading, ...buttonProps }: ButtonProps) => {
   const className = twMerge(
-    "py-2 px-8 active:scale-[99%] disabled:bg-neutral-400 disabled:bg-opacity-30 disabled:text-gray-400 disabled:cursor-not-allowed",
-    buttonProps.className,
+    'w-fit py-2 px-8 active:scale-[99%] disabled:bg-neutral-400 disabled:bg-opacity-30 disabled:text-gray-400 disabled:cursor-not-allowed',
+    buttonProps.className
   );
 
   return (

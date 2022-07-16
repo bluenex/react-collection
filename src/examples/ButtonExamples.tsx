@@ -1,202 +1,87 @@
 import { BsArrowUpSquareFill } from 'react-icons/bs';
 import Button from '../components/Button';
 import ButtonWithIcon from '../components/Button/ButtonWithIcon';
+import ExampleWithTitle from '../components/ExampleWithTitle';
 
 const ButtonExample = () => {
   return (
     <div className="flex flex-col">
-      <h3>Plain</h3>
-      <Button>Click me!</Button>
+      <ExampleWithTitle title="Plain">
+        <Button>Click me!</Button>
+      </ExampleWithTitle>
 
-      <h3>With icon</h3>
-      <ButtonWithIcon position="right" icon={<BsArrowUpSquareFill />}>
-        Go up
-      </ButtonWithIcon>
-
-      <h3>Styled</h3>
-      <div className="flex gap-2">
-        <Button className="bg-sky-300">Click me!</Button>
-        <ButtonWithIcon
-          className="bg-orange-500 rounded-full text-gray-50 font-bold"
-          position="right"
-          icon={
-            <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
-          }
-        >
+      <ExampleWithTitle title="With icon">
+        <ButtonWithIcon position="right" icon={<BsArrowUpSquareFill />}>
           Go up
         </ButtonWithIcon>
-      </div>
+      </ExampleWithTitle>
 
-      {/* here */}
+      <ExampleWithTitle title="Styled">
+        <div className="flex gap-2">
+          <Button>Click me!</Button>
+          <Button className="bg-sky-300">Click me!</Button>
+          <ButtonWithIcon
+            className="bg-orange-500 rounded-full text-gray-50 font-bold"
+            position="right"
+            icon={
+              <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
+            }
+          >
+            Go up
+          </ButtonWithIcon>
+        </div>
+      </ExampleWithTitle>
 
-      <h3>Plain</h3>
-      <Button>Click me!</Button>
+      <ExampleWithTitle title="Disabled">
+        <div className="flex gap-2">
+          <Button disabled>Click me!</Button>
+          <Button className="bg-sky-300" disabled>
+            Click me!
+          </Button>
+          <ButtonWithIcon
+            disabled
+            className="bg-orange-500 rounded-full text-gray-50 font-bold"
+            position="right"
+            icon={
+              <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
+            }
+          >
+            Go up
+          </ButtonWithIcon>
+        </div>
+      </ExampleWithTitle>
 
-      <h3>With icon</h3>
-      <ButtonWithIcon position="right" icon={<BsArrowUpSquareFill />}>
-        Go up
-      </ButtonWithIcon>
-
-      <h3>Styled</h3>
-      <div className="flex gap-2">
-        <Button className="bg-sky-300">Click me!</Button>
-        <ButtonWithIcon
-          className="bg-orange-500 rounded-full text-gray-50 font-bold"
-          position="right"
-          icon={
-            <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
-          }
-        >
-          Go up
-        </ButtonWithIcon>
-      </div>
-      <h3>Plain</h3>
-      <Button>Click me!</Button>
-
-      <h3>With icon</h3>
-      <ButtonWithIcon position="right" icon={<BsArrowUpSquareFill />}>
-        Go up
-      </ButtonWithIcon>
-
-      <h3>Styled</h3>
-      <div className="flex gap-2">
-        <Button className="bg-sky-300">Click me!</Button>
-        <ButtonWithIcon
-          className="bg-orange-500 rounded-full text-gray-50 font-bold"
-          position="right"
-          icon={
-            <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
-          }
-        >
-          Go up
-        </ButtonWithIcon>
-      </div>
-      <h3>Plain</h3>
-      <Button>Click me!</Button>
-
-      <h3>With icon</h3>
-      <ButtonWithIcon position="right" icon={<BsArrowUpSquareFill />}>
-        Go up
-      </ButtonWithIcon>
-
-      <h3>Styled</h3>
-      <div className="flex gap-2">
-        <Button className="bg-sky-300">Click me!</Button>
-        <ButtonWithIcon
-          className="bg-orange-500 rounded-full text-gray-50 font-bold"
-          position="right"
-          icon={
-            <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
-          }
-        >
-          Go up
-        </ButtonWithIcon>
-      </div>
-      <h3>Plain</h3>
-      <Button>Click me!</Button>
-
-      <h3>With icon</h3>
-      <ButtonWithIcon position="right" icon={<BsArrowUpSquareFill />}>
-        Go up
-      </ButtonWithIcon>
-
-      <h3>Styled</h3>
-      <div className="flex gap-2">
-        <Button className="bg-sky-300">Click me!</Button>
-        <ButtonWithIcon
-          className="bg-orange-500 rounded-full text-gray-50 font-bold"
-          position="right"
-          icon={
-            <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
-          }
-        >
-          Go up
-        </ButtonWithIcon>
-      </div>
-      <h3>Plain</h3>
-      <Button>Click me!</Button>
-
-      <h3>With icon</h3>
-      <ButtonWithIcon position="right" icon={<BsArrowUpSquareFill />}>
-        Go up
-      </ButtonWithIcon>
-
-      <h3>Styled</h3>
-      <div className="flex gap-2">
-        <Button className="bg-sky-300">Click me!</Button>
-        <ButtonWithIcon
-          className="bg-orange-500 rounded-full text-gray-50 font-bold"
-          position="right"
-          icon={
-            <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
-          }
-        >
-          Go up
-        </ButtonWithIcon>
-      </div>
-      <h3>Plain</h3>
-      <Button>Click me!</Button>
-
-      <h3>With icon</h3>
-      <ButtonWithIcon position="right" icon={<BsArrowUpSquareFill />}>
-        Go up
-      </ButtonWithIcon>
-
-      <h3>Styled</h3>
-      <div className="flex gap-2">
-        <Button className="bg-sky-300">Click me!</Button>
-        <ButtonWithIcon
-          className="bg-orange-500 rounded-full text-gray-50 font-bold"
-          position="right"
-          icon={
-            <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
-          }
-        >
-          Go up
-        </ButtonWithIcon>
-      </div>
-      <h3>Plain</h3>
-      <Button>Click me!</Button>
-
-      <h3>With icon</h3>
-      <ButtonWithIcon position="right" icon={<BsArrowUpSquareFill />}>
-        Go up
-      </ButtonWithIcon>
-
-      <h3>Styled</h3>
-      <div className="flex gap-2">
-        <Button className="bg-sky-300">Click me!</Button>
-        <ButtonWithIcon
-          className="bg-orange-500 rounded-full text-gray-50 font-bold"
-          position="right"
-          icon={
-            <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
-          }
-        >
-          Go up
-        </ButtonWithIcon>
-      </div>
-      <h3>Plain</h3>
-      <Button>Click me!</Button>
-
-      <h3>With icon</h3>
-      <ButtonWithIcon position="right" icon={<BsArrowUpSquareFill />}>
-        Go up
-      </ButtonWithIcon>
-
-      <h3>Styled</h3>
-      <div className="flex gap-2">
-        <Button className="bg-sky-300">Click me!</Button>
-        <ButtonWithIcon
-          className="bg-orange-500 rounded-full text-gray-50 font-bold"
-          position="right"
-          icon={
-            <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
-          }
-        >
-          Go up
-        </ButtonWithIcon>
-      </div>
+      <ExampleWithTitle title="Loading">
+        <div className="flex gap-2">
+          <Button className="bg-sky-300" isLoading>
+            Click me!
+          </Button>
+          <Button className="bg-sky-300" isLoading disabled>
+            Click me!
+          </Button>
+          <ButtonWithIcon
+            isLoading
+            className="bg-orange-500 rounded-full text-gray-50 font-bold"
+            position="right"
+            icon={
+              <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
+            }
+          >
+            Go up
+          </ButtonWithIcon>
+          <ButtonWithIcon
+            isLoading
+            disabled
+            className="bg-orange-500 rounded-full text-gray-50 font-bold"
+            position="right"
+            icon={
+              <BsArrowUpSquareFill className="text-sm ml-0.5 animate-bounce" />
+            }
+          >
+            Go up
+          </ButtonWithIcon>
+        </div>
+      </ExampleWithTitle>
     </div>
   );
 };

@@ -1,12 +1,8 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
-import Button from '.';
+import Button, { ButtonProps } from '.';
 
-interface ButtonWithIconProps
-  extends DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
+interface ButtonWithIconProps extends ButtonProps {
   position: 'left' | 'right';
   icon: ReactNode;
 }
