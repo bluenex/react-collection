@@ -35,7 +35,7 @@ const Paginator = ({ children }: { children: ReactNode }) => {
       </ul>
 
       {/* component area */}
-      <div className="h-screen w-full overflow-y-auto flex justify-center py-8">
+      <div className="h-screen w-full overflow-y-auto flex justify-center py-8 px-4">
         {childrenArr[currentInd]}
       </div>
     </div>

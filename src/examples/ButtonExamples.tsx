@@ -17,7 +17,7 @@ const ButtonExample = () => {
       </ExampleWithTitle>
 
       <ExampleWithTitle title="Styled">
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <Button>Click me!</Button>
           <Button className="bg-sky-300">Click me!</Button>
           <ButtonWithIcon
@@ -33,7 +33,7 @@ const ButtonExample = () => {
       </ExampleWithTitle>
 
       <ExampleWithTitle title="Disabled">
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <Button disabled>Click me!</Button>
           <Button className="bg-sky-300" disabled>
             Click me!
@@ -52,7 +52,7 @@ const ButtonExample = () => {
       </ExampleWithTitle>
 
       <ExampleWithTitle title="Loading">
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <Button className="bg-sky-300" isLoading>
             Click me!
           </Button>
