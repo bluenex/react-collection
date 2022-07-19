@@ -38,6 +38,8 @@ const DropzoneExample = () => {
             dropzoneState={dropzoneState}
             selectedFilesWithPreview={files}
             onRemoveFile={(removedIndex) => {
+              // revoke to clean up memory here too
+              URL.revokeObjectURL(files[removedIndex].preview);
               setFiles((p) => p.filter((_, ind) => ind !== removedIndex));
             }}
           />
