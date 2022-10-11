@@ -43,13 +43,14 @@ type SelectedObj = {
 };
 
 const MonthPicker = () => {
+  const maxSelected = 2;
   const [selected, setSelected] = useState<SelectedObj>([]);
 
   return (
-    <div className="w-fit h-fit p-4 rounded-xl shadow-lg shadow-neutral-400 grid gap-y-4">
+    <div className="w-fit h-fit p-4 rounded-xl shadow-lg shadow-neutral-400 grid gap-y-4 text-neutral-700">
       {supportYears.map((y) => {
         return (
-          <div>
+          <div key={y}>
             <h3 className="text-lg font-bold mb-2">{y}</h3>
             <div className="grid grid-cols-4 grid-rows-3 gap-x-6 gap-y-2 mb-4">
               {monthMap.map((m, ind) => {
@@ -57,6 +58,7 @@ const MonthPicker = () => {
 
                 return (
                   <button
+                    key={`${y}-${m}`}
                     className={twMerge(
                       'flex gap-1.5 items-center',
                       isActive && 'font-semibold text-green-600',
@@ -68,18 +70,33 @@ const MonthPicker = () => {
                       setSelected((p) => {
                         const selectedMonths = p?.[y];
 
-                        if (!selectedMonths) {
-                          return { ...p, [y]: [ind] };
-                        }
-
                         // if already checked, remove
-                        if (selectedMonths.includes(ind)) {
+                        if (selectedMonths?.includes(ind)) {
                           return {
                             ...p,
                             [y]: selectedMonths.filter((x) => x !== ind),
                           };
                         }
 
+                        // -- limit number of selection
+                        const selectedCount = Object.entries(p).reduce(
+                          (acc, [, v]) => {
+                            return acc + v.length;
+                          },
+                          0
+                        );
+
+                        if (selectedCount >= maxSelected) {
+                          return p;
+                        }
+                        // --
+
+                        // if never select months of this year at all, just add
+                        if (!selectedMonths) {
+                          return { ...p, [y]: [ind] };
+                        }
+
+                        // if there is other month in this year selected, update
                         return {
                           ...p,
                           [y]: [...selectedMonths, ind],
