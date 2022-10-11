@@ -1,3 +1,19 @@
+import { twMerge } from 'tailwind-merge';
+import CheckIcon from '../MonthPicker/CheckIcon';
+
+const Checkbox = ({ active }: { active?: boolean }) => {
+  return (
+    <div
+      className={twMerge(
+        'w-4 h-4 rounded border border-neutral-300 mt-0.5 p-0.5',
+        active && 'border-green-500 bg-green-500'
+      )}
+    >
+      {active && <CheckIcon className="fill-white" />}
+    </div>
+  );
+};
+
 const monthMap = [
   'ม.ค.',
   'ก.พ.',
@@ -27,8 +43,13 @@ const MonthPicker = () => {
           <div>
             <h3 className="text-lg font-bold mb-2">{y}</h3>
             <div className="grid grid-cols-4 grid-rows-3 gap-x-6 gap-y-2 mb-4">
-              {monthMap.map((m) => {
-                return <button>☑ {m}</button>;
+              {monthMap.map((m, ind) => {
+                return (
+                  <button className="flex gap-1.5 items-center">
+                    <Checkbox active={!!(ind % 2)} />
+                    {m}
+                  </button>
+                );
               })}
             </div>
             <hr />
