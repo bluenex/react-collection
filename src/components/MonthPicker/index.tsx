@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import CheckIcon from '../MonthPicker/CheckIcon';
 
@@ -35,7 +36,15 @@ const currentMonth = now.getUTCMonth();
 
 const supportYears = [currentYear, currentYear - 1];
 
+type SelectedObj = {
+  // key as year, value as selected months
+  // 0 = Jan, 11 = Dev
+  [year: number]: number[];
+};
+
 const MonthPicker = () => {
+  const [selected, setSelected] = useState<SelectedObj>([]);
+
   return (
     <div className="w-fit h-fit p-4 rounded-xl shadow-lg shadow-neutral-400 grid gap-y-4">
       {supportYears.map((y) => {
@@ -44,9 +53,35 @@ const MonthPicker = () => {
             <h3 className="text-lg font-bold mb-2">{y}</h3>
             <div className="grid grid-cols-4 grid-rows-3 gap-x-6 gap-y-2 mb-4">
               {monthMap.map((m, ind) => {
+                const isActive = selected?.[y]?.includes(ind);
+
                 return (
-                  <button className="flex gap-1.5 items-center">
-                    <Checkbox active={!!(ind % 2)} />
+                  <button
+                    className="flex gap-1.5 items-center"
+                    onClick={() => {
+                      setSelected((p) => {
+                        const selectedMonths = p?.[y];
+
+                        if (!selectedMonths) {
+                          return { ...p, [y]: [ind] };
+                        }
+
+                        // if already checked, remove
+                        if (selectedMonths.includes(ind)) {
+                          return {
+                            ...p,
+                            [y]: selectedMonths.filter((x) => x !== ind),
+                          };
+                        }
+
+                        return {
+                          ...p,
+                          [y]: [...selectedMonths, ind],
+                        };
+                      });
+                    }}
+                  >
+                    <Checkbox active={isActive} />
                     {m}
                   </button>
                 );
