@@ -57,7 +57,13 @@ const MonthPicker = () => {
 
                 return (
                   <button
-                    className="flex gap-1.5 items-center"
+                    className={twMerge(
+                      'flex gap-1.5 items-center',
+                      isActive && 'font-semibold text-green-600',
+                      y === currentYear &&
+                        ind === currentMonth &&
+                        'text-green-500'
+                    )}
                     onClick={() => {
                       setSelected((p) => {
                         const selectedMonths = p?.[y];
