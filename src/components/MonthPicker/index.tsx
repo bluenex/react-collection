@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import CheckIcon from '../MonthPicker/CheckIcon';
 
@@ -12,6 +12,40 @@ const selectedCounter = (stateObj: SelectedObj) =>
   Object.entries(stateObj).reduce((acc, [, v]) => {
     return acc + v.length;
   }, 0);
+
+const selectedUpdater = (
+  stateObj: SelectedObj,
+  year: number,
+  monthIndex: number,
+  maxSelected: number
+) => {
+  const selectedMonths = stateObj?.[year];
+
+  // if already checked, remove
+  if (selectedMonths?.includes(monthIndex)) {
+    return {
+      ...stateObj,
+      [year]: selectedMonths.filter((x) => x !== monthIndex),
+    };
+  }
+
+  // -- limit number of selection
+  if (selectedCounter(stateObj) >= maxSelected) {
+    return stateObj;
+  }
+  // --
+
+  // if never select months of this year at all, just add
+  if (!selectedMonths) {
+    return { ...stateObj, [year]: [monthIndex] };
+  }
+
+  // if there is other month in this year selected, update
+  return {
+    ...stateObj,
+    [year]: [...selectedMonths, monthIndex],
+  };
+};
 
 const Checkbox = ({ active }: { active?: boolean }) => {
   return (
@@ -47,11 +81,25 @@ const currentMonth = now.getUTCMonth();
 
 const supportYears = [currentYear, currentYear - 1];
 
-const MonthPicker = () => {
-  const maxSelected = 2;
-  const [selected, setSelected] = useState<SelectedObj>({});
+interface MonthPickerProps {
+  selectedValue?: SelectedObj;
+  onSelectedChange?: (updatedSelected: SelectedObj) => void;
+  maxSelected: number;
+}
+
+const MonthPicker = ({
+  selectedValue,
+  onSelectedChange,
+  maxSelected = 2,
+}: MonthPickerProps) => {
+  const [selected, setSelected] = useState<SelectedObj>(selectedValue || {});
 
   const isMaxSelected = selectedCounter(selected) >= maxSelected;
+
+  useEffect(() => {
+    // call onSelectedChange when the selectedObj is updated
+    onSelectedChange?.(selected);
+  }, [selected]);
 
   return (
     <div className="w-fit h-fit p-4 rounded-xl shadow-lg shadow-neutral-400 grid gap-y-4 text-neutral-700">
@@ -78,32 +126,10 @@ const MonthPicker = () => {
                     )}
                     onClick={() => {
                       setSelected((p) => {
-                        const selectedMonths = p?.[y];
+                        const updated = selectedUpdater(p, y, ind, maxSelected);
+                        onSelectedChange?.(updated);
 
-                        // if already checked, remove
-                        if (selectedMonths?.includes(ind)) {
-                          return {
-                            ...p,
-                            [y]: selectedMonths.filter((x) => x !== ind),
-                          };
-                        }
-
-                        // -- limit number of selection
-                        if (selectedCounter(p) >= maxSelected) {
-                          return p;
-                        }
-                        // --
-
-                        // if never select months of this year at all, just add
-                        if (!selectedMonths) {
-                          return { ...p, [y]: [ind] };
-                        }
-
-                        // if there is other month in this year selected, update
-                        return {
-                          ...p,
-                          [y]: [...selectedMonths, ind],
-                        };
+                        return updated;
                       });
                     }}
                   >
