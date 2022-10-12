@@ -2,6 +2,17 @@ import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import CheckIcon from '../MonthPicker/CheckIcon';
 
+type SelectedObj = {
+  // key as year, value as selected months
+  // 0 = Jan, 11 = Dev
+  [year: number]: number[];
+};
+
+const selectedCounter = (stateObj: SelectedObj) =>
+  Object.entries(stateObj).reduce((acc, [, v]) => {
+    return acc + v.length;
+  }, 0);
+
 const Checkbox = ({ active }: { active?: boolean }) => {
   return (
     <div
@@ -36,15 +47,11 @@ const currentMonth = now.getUTCMonth();
 
 const supportYears = [currentYear, currentYear - 1];
 
-type SelectedObj = {
-  // key as year, value as selected months
-  // 0 = Jan, 11 = Dev
-  [year: number]: number[];
-};
-
 const MonthPicker = () => {
   const maxSelected = 2;
-  const [selected, setSelected] = useState<SelectedObj>([]);
+  const [selected, setSelected] = useState<SelectedObj>({});
+
+  const isMaxSelected = selectedCounter(selected) >= maxSelected;
 
   return (
     <div className="w-fit h-fit p-4 rounded-xl shadow-lg shadow-neutral-400 grid gap-y-4 text-neutral-700">
@@ -55,6 +62,8 @@ const MonthPicker = () => {
             <div className="grid grid-cols-4 grid-rows-3 gap-x-6 gap-y-2 mb-4">
               {monthMap.map((m, ind) => {
                 const isActive = selected?.[y]?.includes(ind);
+                const isCurrentMonth =
+                  y === currentYear && ind === currentMonth;
 
                 return (
                   <button
@@ -62,9 +71,10 @@ const MonthPicker = () => {
                     className={twMerge(
                       'flex gap-1.5 items-center',
                       isActive && 'font-semibold text-green-600',
-                      y === currentYear &&
-                        ind === currentMonth &&
-                        'text-green-500'
+                      isCurrentMonth && 'text-green-500',
+                      isMaxSelected &&
+                        !isActive &&
+                        'cursor-default text-neutral-300'
                     )}
                     onClick={() => {
                       setSelected((p) => {
@@ -79,14 +89,7 @@ const MonthPicker = () => {
                         }
 
                         // -- limit number of selection
-                        const selectedCount = Object.entries(p).reduce(
-                          (acc, [, v]) => {
-                            return acc + v.length;
-                          },
-                          0
-                        );
-
-                        if (selectedCount >= maxSelected) {
+                        if (selectedCounter(p) >= maxSelected) {
                           return p;
                         }
                         // --
