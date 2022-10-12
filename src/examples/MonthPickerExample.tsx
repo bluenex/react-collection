@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import Button from '../components/Button';
 import ExampleWithTitle from '../components/ExampleWithTitle';
 import MonthPicker, { SelectedObj } from '../components/MonthPicker';
 
 const MonthPickerExample = () => {
   const [fullOptionsState, setFullOptionsState] = useState<SelectedObj>({});
+  const [isPickerVisible, setIsPickerVisible] = useState(false);
 
   return (
     <div className="flex flex-col w-full">
@@ -25,6 +27,27 @@ const MonthPickerExample = () => {
             setFullOptionsState(value);
           }}
         />
+      </ExampleWithTitle>
+
+      <ExampleWithTitle title="As a popover">
+        <div id="container" className="relative">
+          <Button
+            className="bg-green-300 px-4 rounded-xl"
+            onClick={() => setIsPickerVisible((p) => !p)}
+          >
+            Toggle Picker: {JSON.stringify(fullOptionsState, null, 2)}
+          </Button>
+
+          {isPickerVisible && (
+            <MonthPicker
+              className="absolute top-12 left-0"
+              selectedValue={fullOptionsState}
+              onSelectedChange={(value) => {
+                setFullOptionsState(value);
+              }}
+            />
+          )}
+        </div>
       </ExampleWithTitle>
 
       {/* footer padder, there should be a better way */}

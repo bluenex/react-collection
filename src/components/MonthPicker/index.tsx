@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, DetailedHTMLProps, HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 import CheckIcon from '../MonthPicker/CheckIcon';
 
@@ -79,7 +79,8 @@ const now = new Date();
 const currentYear = now.getUTCFullYear();
 const currentMonth = now.getUTCMonth();
 
-interface MonthPickerProps {
+interface MonthPickerProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   thisYear?: number;
   selectedValue?: SelectedObj;
   onSelectedChange?: (updatedSelected: SelectedObj) => void;
@@ -91,6 +92,7 @@ const MonthPicker = ({
   selectedValue,
   onSelectedChange,
   maxSelected = 2,
+  ...divProps
 }: MonthPickerProps) => {
   const [selected, setSelected] = useState<SelectedObj>(selectedValue || {});
 
@@ -103,7 +105,13 @@ const MonthPicker = ({
   }, [selected]);
 
   return (
-    <div className="w-fit h-fit p-4 rounded-xl shadow-lg shadow-neutral-400 grid gap-y-4 text-neutral-700">
+    <div
+      {...divProps}
+      className={twMerge(
+        'w-fit h-fit p-4 rounded-xl shadow-lg shadow-neutral-400 grid gap-y-4 text-neutral-700',
+        divProps?.className
+      )}
+    >
       {supportYears.map((y) => {
         return (
           <div key={y}>
