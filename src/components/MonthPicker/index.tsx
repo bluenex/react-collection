@@ -82,12 +82,14 @@ const currentMonth = now.getUTCMonth();
 const supportYears = [currentYear, currentYear - 1];
 
 interface MonthPickerProps {
+  thisYear?: number;
   selectedValue?: SelectedObj;
   onSelectedChange?: (updatedSelected: SelectedObj) => void;
-  maxSelected: number;
+  maxSelected?: number;
 }
 
 const MonthPicker = ({
+  thisYear = currentYear,
   selectedValue,
   onSelectedChange,
   maxSelected = 2,
