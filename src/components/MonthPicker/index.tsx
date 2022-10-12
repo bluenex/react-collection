@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import CheckIcon from '../MonthPicker/CheckIcon';
 
-type SelectedObj = {
+export type SelectedObj = {
   // key as year, value as selected months
   // 0 = Jan, 11 = Dev
   [year: number]: number[];
@@ -79,8 +79,6 @@ const now = new Date();
 const currentYear = now.getUTCFullYear();
 const currentMonth = now.getUTCMonth();
 
-const supportYears = [currentYear, currentYear - 1];
-
 interface MonthPickerProps {
   thisYear?: number;
   selectedValue?: SelectedObj;
@@ -96,6 +94,7 @@ const MonthPicker = ({
 }: MonthPickerProps) => {
   const [selected, setSelected] = useState<SelectedObj>(selectedValue || {});
 
+  const supportYears = [thisYear || currentYear, (thisYear || currentYear) - 1];
   const isMaxSelected = selectedCounter(selected) >= maxSelected;
 
   useEffect(() => {
