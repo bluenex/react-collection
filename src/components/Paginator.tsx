@@ -10,11 +10,11 @@ const Paginator = ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex">
       {/* left panel */}
-      <ul className="h-screen overflow-y-auto flex flex-col flex-shrink-0 border-r border-sky-300 text-gray-600">
+      <ul className="h-screen overflow-y-auto flex flex-col flex-shrink-0 border-r border-sky-300 text-gray-600 text-xs">
         {childrenArr.map((child, index) => {
           const liClassName = twMerge(
             'border-b border-sky-300',
-            currentInd === index ? 'bg-sky-700 text-white font-semibold' : ''
+            currentInd === index ? 'bg-sky-700 text-white' : ''
           );
 
           const componentType = (child as any).type;

@@ -2,6 +2,7 @@ import Paginator from './components/Paginator';
 import ButtonExample from './examples/ButtonExample';
 import DropzoneExample from './examples/DropzoneExample';
 import MonthPickerExample from './examples/MonthPickerExample';
+import TapOutsideDetectorExample from './examples/TapOutsideDetectorExample';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <DropzoneExample />
         <ButtonExample />
         <MonthPickerExample />
+        <TapOutsideDetectorExample />
       </Paginator>
     </div>
   );
