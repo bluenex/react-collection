@@ -1,28 +1,26 @@
 import { useState, FC, Dispatch, SetStateAction } from 'react';
-import Button from '../components/Button';
 import ExampleWithTitle from '../components/ExampleWithTitle';
-import MonthPicker, { SelectedObj } from '../components/MonthPicker';
 import TapOutsideDetector from '../components/TapOutsideDetector';
 
 interface PopoverWithTriggerProps {
-  isPopOverVisible: boolean;
-  setIsPopOverVisible: Dispatch<SetStateAction<boolean>>;
+  isPopoverVisible: boolean;
+  setIsPopoverVisible: Dispatch<SetStateAction<boolean>>;
 }
 
 const PopoverWithTrigger: FC<PopoverWithTriggerProps> = ({
-  isPopOverVisible,
-  setIsPopOverVisible,
+  isPopoverVisible,
+  setIsPopoverVisible,
 }) => {
   return (
-    <div className="relative w-fit mt-8">
-      {isPopOverVisible && (
+    <div className="relative w-fit">
+      {isPopoverVisible && (
         <div className="absolute -top-9 text-sm p-1 rounded border border-gray-300 bg-gray-200 whitespace-nowrap">
-          This is popover, tap below to close it.
+          This is a popover, tap anywhere to close it.
         </div>
       )}
 
-      <button onClick={() => setIsPopOverVisible((p) => !p)}>
-        Click here!
+      <button onClick={() => setIsPopoverVisible((p) => !p)}>
+        Click here to open a popover!
       </button>
     </div>
   );
@@ -44,7 +42,7 @@ const ModalWithContent: FC<ModalWithContentProps> = ({
       </button>
 
       <TapOutsideDetector triggererId="modal-triggerer" onTapOutside={onClose}>
-        <div id="content" className="bg-gray-300 rounded-md p-4">
+        <div id="content" className="bg-gray-100 rounded-md p-4">
           Some modal content
         </div>
       </TapOutsideDetector>
@@ -53,21 +51,23 @@ const ModalWithContent: FC<ModalWithContentProps> = ({
 };
 
 const TapOutsideDetectorExample = () => {
-  const [isPopOverVisible, setIsPopOverVisible] = useState(false);
+  const [isPopoverVisible, setIsPopoverVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
     <div className="flex flex-col w-full relative">
+      {JSON.stringify(TapOutsideDetector, null, 2)}
+
       <ModalWithContent
         isModalVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
       />
 
       <ExampleWithTitle title="Without `triggererId`">
-        <TapOutsideDetector onTapOutside={() => setIsPopOverVisible(false)}>
+        <TapOutsideDetector onTapOutside={() => setIsPopoverVisible(false)}>
           <PopoverWithTrigger
-            isPopOverVisible={isPopOverVisible}
-            setIsPopOverVisible={setIsPopOverVisible}
+            isPopoverVisible={isPopoverVisible}
+            setIsPopoverVisible={setIsPopoverVisible}
           />
         </TapOutsideDetector>
       </ExampleWithTitle>
@@ -78,7 +78,7 @@ const TapOutsideDetectorExample = () => {
           className="text-left"
           onClick={() => setIsModalVisible(true)}
         >
-          Click here to open modal!
+          Click here to open a modal!
         </button>
       </ExampleWithTitle>
 
