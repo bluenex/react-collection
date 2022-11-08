@@ -1,3 +1,3 @@
-# bluenex-react-collection
+# React Collection
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/bluenex-react-collection)
+My personal reusable components collection. This is hosted on [StackBlitz](https://stackblitz.com/edit/bluenex-react-collection).
